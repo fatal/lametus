@@ -31,8 +31,13 @@ Copying
 
 Lametus is released under GPL license. See COPYING file.
 
-Author
-------
+Authors
+-------
 
 Lametus was originally created by Ilpo Ruotsalainen <lonewolf at iki fi>. Feel
 free to send comments, suggestions, bug reports and especially patches.
+
+Current developers:
+* Jukka Honkela <jukka at honkela org> 
+  Added the dirty hacks related to ncurses interface and limiter/compressor
+  functionality. 
