@@ -1,36 +1,43 @@
-#ifndef __ENCODER_H__
-#define __ENCODER_H__
+#ifndef ENCODER_H
+#define ENCODER_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-#include <netinet/in.h>
-
+#include <shout/shout.h>
 #include <lame.h>
 
-struct encoder
+#include "audiosource.h"
+
+class Encoder : public QObject
 {
-	lame_global_flags *lame_flags;
+public:
+    Encoder(QObject * parent);
+    ~Encoder();
+    void Init(QString server, QString name, QString pass, QString genre, QString url, int pub, unsigned int samplerate, int bitrate, int channels);
+    void Run(short *,int);
+    void connectToSource(AudioSource * src);
+private:
+    lame_global_flags *lame_flags;
 
-	char *passwd;
-	char *name;
-	char *genre;
-	char *url;
-	char *file_name;
-	int pub;
+    QString passwd;
+    QString encodername;
+    QString genre;
+    QString url;
+    char *file_name;
+    int pub;
 
-	int samplerate;
-	int bitrate;
-	int mono;
-	int produced;
-	int streaming;
+    int samplerate;
+    int bitrate;
+    int mono;
+    int produced;
+    int streaming;
 
-	struct sockaddr_in server_addr;
-	int server_fd;
-	int file_fd;
+//    struct sockaddr_in server_addr;
+    int server_fd;
+    int file_fd;
+    shout_t *shout;
+
 };
 
-struct audio_source;
-
-struct encoder *encoder_create(void);
-void encoder_init(struct audio_source *,struct encoder *);
-void encoder_run(struct encoder *,short *,int);
-
-#endif
+#endif // ENCODER_H
