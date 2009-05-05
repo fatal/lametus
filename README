@@ -1,4 +1,6 @@
-README for lametus 1.1
+README for lametus 1.2
+
+*** This is still work in progress ***
 
 What is lametus
 ---------------
@@ -41,3 +43,5 @@ Current developers:
 * Jukka Honkela <jukka at honkela org> 
   Added the dirty hacks related to ncurses interface and limiter/compressor
   functionality. 
+* Ville Ranki <ville.ranki at iki.fi>
+  Ported to C++ and created Qt GUI

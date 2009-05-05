@@ -1,3 +1,22 @@
+In 1.2 upgrade done:
+
+ - Loads settings (settings.cpp, new format!)
+ - Opens audio source (audiosource.cpp)
+ - Creates and initializes encoder(s) (encoder.cpp)
+ - Audio source in GUI works
+ - Encoder list in GUI works
+
+Currently missing functionality:
+
+ - Encoders connection to streaming server untested
+ - Actual streaming
+ - Audio adjustments
+ - Rest of GUI
+
+----
+
+Other todo's:
+
 * Better error handling
  - Reconnect on server drop
  - Don't block on send (handle temporary packetloss, slowdown, etc)
@@ -8,12 +27,10 @@
 * Cleanup some parts
  - Source handling could be better (multiple sources(?), non-device sources)
 
-* Add support for comments in config (easy)
-
 * Change proxy definition in config to "hostname:port" (easy)
 
-...
+* Ogg vorbis support
 
-* Add libshout3 support
+...
 
 * Add a lot of other things, + refactoring

@@ -1,3 +1,7 @@
+lametus 1.2
+	* C++ code
+	* Qt interface
+	
 lametus 1.1-multimedia
 	* ncruses interface with VU meter
 	* a kind of limiter / compressor added
