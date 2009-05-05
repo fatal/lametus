@@ -1,0 +1,17 @@
+Adding support for new audio source types
+-----------------------------------------
+
+See audio.h, you need to implement the following functions:
+
+struct audio_source *audio_source_create(void);
+void audio_source_init(struct audio_source *);
+void audio_source_read(struct audio_source *,unsigned char *,int);
+
+audio_source_create() should allocate a "struct audio_source" and fill it with
+reasonable default values.
+
+audio_source_init() should open the audio device and setup it for recording.
+
+audio_source_read() should read the requested number of bytes from the audio
+source. Note that the data is expected to be 16bit signed int format (native
+byteorder) with channels interleaved.

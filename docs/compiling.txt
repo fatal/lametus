@@ -1,0 +1,20 @@
+Prerequisities
+--------------
+
+A supported OS (tested with Linux).
+LAME library and header(s) (tested with version 3.89).
+C compiler (tested with gcc 2.95.4).
+
+Compiling
+---------
+
+Edit Makefile (sorry folks, I'll create some autoconf or something when I have
+time), you most likely need to change LAMEDIR to point to your LAME sources
+and maybe tweak CFLAGS/LDFLAGS/LIBS depending if the LAME folks have changed
+something again. Then just run "make" and hope it compiles...
+
+
+Installing
+----------
+
+Just copy the "lametus" binary to whatever place you see fit.

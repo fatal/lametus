@@ -1,0 +1,100 @@
+Configuring lametus
+-------------------
+
+Example configuration (lines beginning with '#' are comments and not a part of
+the configuration file which does not yet support comments):
+
+# Begin a source definition. Currently only one source is supported and
+# bad things will most likely happen should you try to have two source
+# definitions in the configuration file.
+source {
+
+# Path to the audio device to read data from
+  device "/dev/dsp"
+
+# _Input_ samplerate. Notice that this is only the samplerate at which the
+# audio source is read, not the rate used in the stream.
+# Unit: Hz
+  samplerate 44100
+
+# Stereo input, most likely always a good idea (unless you're using a soundcard
+# which is not capable of stereo recording).
+  channels 2
+
+# End of source definition block
+}
+
+# Begin an encoder-definition. An encoder-definition defines both encoder
+# settings and "upload" settings for sending the stream to a proxy.
+encoder {
+
+# Set the samplerate used for the stream. This can differ from input samplerate
+# and the audio data will be converted as needed.
+# Unit: Hz
+  samplerate 22050
+
+# Set the stream to mono. The default is stereo. This does not need to be the
+# same as channels in the input section, audio data will be converted as
+# needed.
+  mono
+
+# Set bitrate for the stream. Setting this too low compared to the samplerate
+# and mono/stereo modes will give horrid sound quality. Try different settings
+# to find out what is good enough for you (or use what I used in this example,
+# they are rather decent settings for music).
+# Unit: kbits/s
+  bitrate 32
+
+# IP address for the stream proxy the data should be sent to. Currently only
+# numeric IP addresses supported.
+  serverhost "130.233.195.210"
+
+# Port to connect to on the proxy server
+  port 8000
+
+# Password that we must send to the proxy to be recognized as a valid source
+  password "reallame"
+
+# Name of the stream
+  name "#anime.fi radio (lq)"
+
+# Genre of the stream
+  genre "jpop/anime"
+
+# URL of the stream
+  url "http://www.onnanifujiyuu.org/radio/"
+
+# Is the stream public or private.
+  public 1
+
+# End encoder-definition block
+}
+
+# Another encoder definition block
+encoder {
+  samplerate 44100
+  mono
+  bitrate 96
+
+  serverhost "130.233.195.210"
+  serverport 8000
+  password "reallame"
+  name "#anime.fi radio (mq)"
+  genre "jpop/anime"
+  url "http://www.onnanifujiyuu.org/radio/"
+  public 1
+}
+
+# Yet one more encoder block
+encoder {
+  samplerate 44100
+  bitrate 128
+
+  serverhost "130.233.195.210"
+  serverport 8000
+  password "reallame"
+  name "#anime.fi radio (hq)"
+  genre "jpop/anime"
+  url "http://www.onnanifujiyuu.org/radio/"
+  public 1
+}

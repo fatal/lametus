@@ -1,0 +1,38 @@
+README for lametus 1.1
+
+What is lametus
+---------------
+
+Lametus is a realtime mp3 streamer. It uses LAME <http://www.mp3dev.org/> as
+encoder backend.
+
+First version of lametus was made around 2000, the current version is 
+a continuation effort including new features. The interface has right now
+a hack'ish ncurses "multimedia" option with somekind of limiter/compressor.
+
+Homepage
+--------
+
+None at the moment.
+
+Documentation
+-------------
+
+See the "docs" subdirectory for some documentation.
+
+Features
+--------
+
+ - Directly links to LAME library, no pipe hacks needed.
+ - Multiple streams from single audio source, different encoder settings.
+
+Copying
+-------
+
+Lametus is released under GPL license. See COPYING file.
+
+Author
+------
+
+Lametus was originally created by Ilpo Ruotsalainen <lonewolf at iki fi>. Feel
+free to send comments, suggestions, bug reports and especially patches.

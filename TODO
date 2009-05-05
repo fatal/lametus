@@ -1,0 +1,19 @@
+* Better error handling
+ - Reconnect on server drop
+ - Don't block on send (handle temporary packetloss, slowdown, etc)
+
+* Non-device sources (named pipes, whatever)
+ - Need somekinda timing code to stay at right speed (easy to do)
+
+* Cleanup some parts
+ - Source handling could be better (multiple sources(?), non-device sources)
+
+* Add support for comments in config (easy)
+
+* Change proxy definition in config to "hostname:port" (easy)
+
+...
+
+* Add libshout3 support
+
+* Add a lot of other things, + refactoring
