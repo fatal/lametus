@@ -4,7 +4,7 @@
 
 
 CursesControl::CursesControl(CursesControl* aParent ) :
-	iParent( aParent ), iVisible ( 0 )
+	iParent( aParent ), iVisible ( 0 ), iFocused( 0 )
 {
 
     // iWindow = newwin( w, h, x, y );
@@ -50,6 +50,19 @@ void CursesControl::setRect( int x, int y, int w, int h )
 bool CursesControl::handleInput( int ch )
 {
     bool consumed = false;
+
+    if ( iFocused ) {
+        switch (ch) {
+        case KEY_UP:
+//            focusUp(this);
+            consumed = true;
+            break;
+        case KEY_DOWN:
+//            focusDown(this);
+            consumed = true;
+            break;
+        }
+    }
     for ( int i=0; i<controlCount() && !consumed; i++ )
         consumed = control(i)->handleInput(ch);
     return consumed;
@@ -66,8 +79,21 @@ void CursesControl::markDirty()
     CursesApplication::markDirty();
 }
 
+bool CursesControl::isFocused() 
+{
+    return iFocused;
+}
+
 bool CursesControl::isNonFocusing() 
 {
     return true;
 }
 
+bool CursesControl::setFocused(bool aFocused)
+{
+    if ( !isNonFocusing() ) {
+        markDirty();
+        iFocused = aFocused; 
+    }
+    return iFocused;
+}

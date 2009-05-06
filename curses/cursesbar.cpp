@@ -39,7 +39,9 @@ void CursesBar::draw()
 {
 	int i;
     move( iY, iX );
+    if ( iFocused ) attron(A_REVERSE);
     drawString( label() );
+    attroff(A_REVERSE);
     move( iY, iX+iPadding );
     int w = iWidth - iPadding;
 

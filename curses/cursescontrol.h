@@ -21,14 +21,18 @@ public:
     virtual int controlCount();
     virtual CursesControl* control(int index);
     virtual bool isNonFocusing();
+    virtual bool setFocused(bool aFocused);
+    bool isFocused();
 protected:
     int iX, iY, iWidth, iHeight;
     CursesControl* iParent;
     bool iVisible;
     WINDOW* iWindow;
     void markDirty();
+    int iFocused;
 
     virtual void drawString(const QString&);
+
 private:
 };
 
