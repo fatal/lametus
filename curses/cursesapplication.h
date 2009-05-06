@@ -9,13 +9,28 @@
 #define CURSESAPPLICATION_H_
 
 #include <QtCore/QObject>
+#include <QtCore/QCoreApplication>
+#include <QtCore/QEventLoop>
+#include <QtCore/QSocketNotifier>
 
-class CursesApplication : public QObject
+class CursesWindow;
+
+class CursesApplication : public QCoreApplication
 {
     Q_OBJECT
 public:
-	CursesApplication();
-	~CursesApplication();
+    CursesApplication(int argc, char**argv);
+    ~CursesApplication();
+    static void addWindow(CursesWindow*);
+    int exec();
+protected slots:
+    void keyboardInput(int);
+
+private:
+    void doAddWindow(CursesWindow*);
+    QList<CursesWindow*> iWindows;
+    QSocketNotifier* iSocketNotifier;
+
 };
 
 #endif /* CURSESAPPLICATION_H_ */

@@ -9,38 +9,33 @@ CursesControl::CursesControl(CursesControl* aParent ) :
 
 CursesControl::~CursesControl()
 {
-	int i;
-	for ( i = 0; i < iChilds.count(); i++ )
-	{
-		delete iChilds[i];
-	}
 }
 
 int CursesControl::NumberOfControls()
 {
-	return iChilds.length() + 1;
+    return 0;
 }
 
 void CursesControl::Draw()
 {
-	int i;
-	if ( iVisible ) {
-		for ( i=0; i<iChilds.count(); i++ )
-		{
-			iChilds[i]->Draw();
-		}
-	}
 }
 
 void CursesControl::Show()
 {
-	iVisible = 1;
+    iVisible = 1;
 }
-
+WINDOW * CursesControl::Window()
+{
+    return iWindow;
+}
 void CursesControl::SetRect( int x, int y, int w, int h )
 {
-	iX = x;
-	iY = y;
-	iWidth = w;
-	iHeight = h;
+    iX = x;
+    iY = y;
+    iWidth = w;
+    iHeight = h;
+}
+bool CursesControl::handleInput( int ch )
+{
+    return false;
 }

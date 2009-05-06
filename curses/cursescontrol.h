@@ -15,15 +15,14 @@ public:
     virtual void Draw();
     virtual void Show();
     virtual void SetRect( int x, int y, int w, int h );
-
-private:
-    WINDOW * iWindow;
+    virtual WINDOW* Window();
+    virtual bool handleInput(int ch);
 protected:
     int iX, iY, iWidth, iHeight;
     bool iVisible;
-private:
-    QList<CursesControl*> iChilds;
     CursesControl* iParent;
+    WINDOW* iWindow;
+private:
 };
 
 #endif // MAINWINDOW_H

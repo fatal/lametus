@@ -10,17 +10,21 @@ SOURCES += main.cpp \
     settings.cpp \
     curses/cursesapplication.cpp \
     curses/cursescontrol.cpp \
-    curses/cursesbar.cpp
+    curses/cursesbar.cpp \
+    curses/cursesvbox.cpp \
+    curses/curseswindow.cpp
 HEADERS += mainwindow.h \
     encoder.h \
     audiosource.h \
     settings.h \
     curses/cursesapplication.h \
     curses/cursescontrol.h \
-    curses/cursesbar.h
+    curses/cursesbar.h \
+    curses/cursesvbox.h \
+    curses/curseswindow.h
 FORMS += mainwindow.ui
 INCLUDEPATH += /usr/include/shout/ \
-    /usr/include/lame/ curses
-LIBS += -lmp3lame \
+    /usr/include/lame/ curses ../lame-3.89/include
+LIBS += -L. -lmp3lame \
     -lshout -lncurses
 OTHER_FILES += lametus.ini
