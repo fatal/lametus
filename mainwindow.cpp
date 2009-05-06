@@ -14,6 +14,7 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::errorMessage(QString msg) {
+  LametusUI::errorMessage(msg);
   QMessageBox msgbox;
   msgbox.setText(msg);
   msgbox.exec();
