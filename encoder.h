@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <QtCore/QStringList>
 #include <shout/shout.h>
 #include <lame.h>
 

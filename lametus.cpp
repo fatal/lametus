@@ -15,7 +15,7 @@ bool Lametus::initialize(LametusUI *lameUi)
             this, SLOT(sourceFound(uint,int,QString)));
     connect(settings, SIGNAL(encoderFound(QString,QString,QString,QString,QString,int,uint,int,int)),
             this, SLOT(encoderFound(QString,QString,QString,QString,QString,int,uint,int,int)));
-    if(!settings->Read("lametus.ini")) {
+    if(!settings->Read("./lametus.ini")) {
       ui->errorMessage("Could not open settings file");
         return FALSE;
     }
