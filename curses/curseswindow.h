@@ -19,11 +19,13 @@ public:
     CursesWindow(CursesControl * aParent);
     ~CursesWindow();
 
-    void Draw();
+    void draw();
 
-    void Show();
     void setChild( CursesControl * aChild );
     bool handleInput(int ch);
+
+    CursesControl* control(int);
+    int controlCount();
 
     WINDOW* Window();
 private:

@@ -19,8 +19,10 @@ public:
     CursesVBox(CursesControl * aParent);
     ~CursesVBox();
 
-    void Draw();
-    void Show();
+    void draw();
+
+    CursesControl* control(int);
+    int controlCount();
 
     void addChild( CursesControl * aChild );
 private:

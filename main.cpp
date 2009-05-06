@@ -6,9 +6,7 @@
 #include "mainwindow.h"
 #else
 #include "cursesapplication.h"
-#include "cursesbar.h"
-#include "curseswindow.h"
-#include "cursesvbox.h"
+#include "maincurseswindow.h"
 #endif
 
 
@@ -21,11 +19,8 @@ int main(int argc, char *argv[])
     return a.exec();
 #else
     CursesApplication a(argc, argv);
-    CursesWindow win(NULL);
-    CursesVBox box((CursesControl*)&win);
-    CursesBar bar(&box);
-    box.addChild(&bar);
-    win.Show();
+    MainCursesWindow win(NULL);
+    win.show();
     return a.exec();
 #endif
 }

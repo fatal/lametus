@@ -7,7 +7,8 @@
 
 #include "cursesbar.h"
 
-CursesBar::CursesBar( CursesControl* aParent ) : CursesControl( aParent )
+CursesBar::CursesBar( CursesControl* aParent, const QString& aLabel  ) : 
+    CursesControl( aParent ), iLabel( aLabel) 
 {
 
 }
@@ -19,21 +20,32 @@ CursesBar::~CursesBar()
 
 void CursesBar::setValue( int aValue )
 {
-	if ( aValue >= 0 && aValue < iWidth )
+    // value is in %
+	if ( aValue >= 0 && aValue <= 100 ) 
+    {
 		iValue = aValue;
+        markDirty();
+    }
+    
 }
 
-void CursesBar::Draw()
+void CursesBar::draw()
 {
 	int i;
-	for ( i=0 ; i<iValue; i++ )
+    move( iY, iX );
+    drawString( iLabel );
+    int w = iWidth - iLabel.length();
+
+    int value = w * iValue / 100;
+
+	for ( i=0 ; i<value; i++ )
 	{
-		if ( i > iValue * 7 / 10 )
+		if ( i > value * 7 / 10 )
 			addch('#'|COLOR_PAIR(1));
-		else if ( i > iValue * 6 / 10 )
+		else if ( i > value * 6 / 10 )
 			addch('#'|COLOR_PAIR(2));
 		else
 			addch('#'|COLOR_PAIR(3));
 	}
-	CursesControl::Draw();
+	CursesControl::draw();
 }

@@ -23,6 +23,15 @@ void CursesWindow::setChild( CursesControl* aChild )
     iChild = aChild;
 }
 
+CursesControl* CursesWindow::control(int index)
+{
+    return iChild;
+}
+int CursesWindow::controlCount()
+{
+    return iChild == 0 ? 0 : 1;
+}
+
 WINDOW* CursesWindow::Window() 
 {
     if ( iParent ) return iParent->Window();
@@ -30,24 +39,13 @@ WINDOW* CursesWindow::Window()
 //    iWindow = newwin( iWidth, iHeight, iX, iY );
     return iWindow;
 }
-void CursesWindow::Show()
-{
-    if ( iChild ) iChild->Show();
-    CursesControl::Show();
-}
 
-void CursesWindow::Draw()
+void CursesWindow::draw()
 {
     // decoration etc stuff goes here if anything.. 
-    if ( iChild ) iChild->Draw();
+    CursesControl::draw();
 }
 bool CursesWindow::handleInput( int ch )
 {
-    addch('e');
-    if ( ch == 9 ) {
-        CursesApplication::quit();
-	addch('t');
-        return true;
-    }
-    return false;
+    return CursesControl::handleInput( ch );
 }

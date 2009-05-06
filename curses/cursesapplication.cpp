@@ -24,8 +24,8 @@ CursesApplication::CursesApplication(int argc, char**argv) : QCoreApplication(ar
     clear();
 
     init_pair(1, COLOR_BLUE, COLOR_BLACK);
-    init_pair(1, COLOR_RED, COLOR_BLACK);
-    init_pair(1, COLOR_WHITE, COLOR_BLACK);
+    init_pair(2, COLOR_RED, COLOR_BLACK);
+    init_pair(3, COLOR_WHITE, COLOR_BLACK);
 
     refresh();
 
@@ -38,6 +38,8 @@ CursesApplication::CursesApplication(int argc, char**argv) : QCoreApplication(ar
 
     iTimer->start();
     cursesApp = this;
+
+    iPendingRedraw = true;
 }
 
 CursesApplication::~CursesApplication()
@@ -69,9 +71,14 @@ void CursesApplication::timerTimeout()
 
     if ( iPendingRedraw ) {
         for ( int i=0; i<iWindows.count(); i++ )
-            iWindows[0]->Draw();
+            iWindows[0]->draw();
         refresh();
         iPendingRedraw = false;
     }
     iTimer->start();
+}
+
+void CursesApplication::markDirty()
+{
+    cursesApp->iPendingRedraw = true;
 }

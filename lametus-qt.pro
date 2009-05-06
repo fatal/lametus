@@ -15,6 +15,8 @@ SOURCES += main.cpp \
     curses/cursesvbox.cpp \
     curses/cursesapplication.cpp \
     curses/curseswindow.cpp \
+    vumeter.cpp \
+    maincurseswindow.cpp \
     lametus.cpp \
     lametus_ui.cpp
 HEADERS += mainwindow.h \
@@ -26,6 +28,8 @@ HEADERS += mainwindow.h \
     curses/cursesbar.h \
     curses/cursesvbox.h \
     curses/curseswindow.h \
+    maincurseswindow.h \
+    vumeter.h \
     lametus.h \
     lametus_ui.h 
 FORMS += mainwindow.ui

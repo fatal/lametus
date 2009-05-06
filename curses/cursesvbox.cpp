@@ -21,15 +21,17 @@ void CursesVBox::addChild( CursesControl* aChild )
         iChildren.append( aChild );
 }
 
-void CursesVBox::Show()
+CursesControl* CursesVBox::control(int index)
 {
-    for ( int i=0; i<iChildren.count(); i++)
-	iChildren[i]->Show();
+    return iChildren[index];
+}
+int CursesVBox::controlCount()
+{
+    return iChildren.count();
 }
 
-void CursesVBox::Draw()
+void CursesVBox::draw()
 {
     // decoration etc stuff goes here if anything.. 
-    for ( int i=0; i<iChildren.count(); i++ )
-        iChildren[i]->Draw();
+    CursesControl::draw();
 }

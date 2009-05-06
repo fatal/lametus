@@ -23,6 +23,7 @@ public:
     CursesApplication(int argc, char**argv);
     ~CursesApplication();
     static void addWindow(CursesWindow*);
+    static void markDirty();
     int exec();
 public slots:
     void timerTimeout();
