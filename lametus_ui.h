@@ -9,10 +9,18 @@
 class LametusUI
 {
 public:
-  virtual LametusUI()=0;
-  virtual ~LametusUI()=0;
+  LametusUI();
+  virtual ~LametusUI();
 
-public slots:
+  virtual void errorMessage(QString msg)=0;
+  // Called when audio source has been created
+  virtual void audioSourceCreated(AudioSource *src) = 0;
+  // Called when audio source's status has been updated.
+  virtual void audioSourceUpdated(AudioSource *src) = 0;
+  // Called when a new encoder has been created
+  virtual void encoderCreated(Encoder *enc) = 0;
+  // Called when a new encoder has been created
+  virtual void encoderUpdated(Encoder *enc) = 0;
 private:
 };
 

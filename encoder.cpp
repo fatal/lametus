@@ -43,6 +43,7 @@ void Encoder::connectToSource(AudioSource *src) {
 
 void Encoder::Init(QString server, QString encodername, QString pass, QString genre, QString url, int pub, unsigned int samplerate, int bitrate, int channels) {
     this->encodername = encodername;
+    this->server = server;
     this->passwd = pass;
     this->genre = genre;
     this->url = url;
@@ -103,4 +104,8 @@ void Encoder::Init(QString server, QString encodername, QString pass, QString ge
 }
 
 void Encoder::Run(short *,int) {
+}
+
+QString Encoder::getServer() {
+  return server;
 }

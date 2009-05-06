@@ -5,7 +5,7 @@ AudioSource::AudioSource(QObject * parent) : QObject(parent)
     internal_data = malloc(sizeof(struct audio_oss_internal));
     if (!internal_data)
         qDebug("Out of memory");
-
+    status = AUDIO_SOURCE_UNKNOWN;
     devname = strdup(OSS_DEFAULT_DEVNAME);
     samplerate = 44100;
     channels = 2;
@@ -25,7 +25,7 @@ bool AudioSource::Init(unsigned int samplerate, int channels, QString device)
     this->samplerate = samplerate;
     this->channels = channels;
     this->devname = device;
-
+    status = AUDIO_SOURCE_FAIL;
     int tmp;
     struct audio_oss_internal *oss =
             (struct audio_oss_internal *)internal_data;
@@ -61,6 +61,7 @@ bool AudioSource::Init(unsigned int samplerate, int channels, QString device)
     fprintf(stderr," Device: '%s'\n",devname.toAscii().data());
     fprintf(stderr," Samplerate: %d Channels: %d\n\n",samplerate,
             channels);
+    status = AUDIO_SOURCE_OK;
     return TRUE;
 }
 
@@ -69,4 +70,8 @@ unsigned int AudioSource::getSamplerate() {
 }
 int AudioSource::getChannels() {
     return channels;
+}
+
+audio_source_status_t AudioSource::getStatus() {
+    return status;
 }

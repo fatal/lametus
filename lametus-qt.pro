@@ -3,15 +3,21 @@
 # -------------------------------------------------
 TARGET = lametus-qt
 TEMPLATE = app
+CONFIG += qt debug
+
 SOURCES += main.cpp \
     mainwindow.cpp \
     encoder.cpp \
     audiosource.cpp \
-    settings.cpp
+    settings.cpp \
+    lametus.cpp \
+    lametus_ui.cpp
 HEADERS += mainwindow.h \
     encoder.h \
     audiosource.h \
-    settings.h
+    settings.h \
+    lametus.h \
+    lametus_ui.h 
 FORMS += mainwindow.ui
 INCLUDEPATH += /usr/include/shout/ \
     /usr/include/lame/
