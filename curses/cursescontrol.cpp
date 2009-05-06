@@ -65,3 +65,9 @@ void CursesControl::markDirty()
 {
     CursesApplication::markDirty();
 }
+
+bool CursesControl::isNonFocusing() 
+{
+    return true;
+}
+

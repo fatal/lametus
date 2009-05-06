@@ -20,6 +20,7 @@ public:
     virtual bool handleInput(int ch);
     virtual int controlCount();
     virtual CursesControl* control(int index);
+    virtual bool isNonFocusing();
 protected:
     int iX, iY, iWidth, iHeight;
     CursesControl* iParent;
