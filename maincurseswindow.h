@@ -10,7 +10,10 @@
 
 #include <QtCore/QObject>
 #include "curseswindow.h"
-#include "vumeter.h"
+
+class CursesVUMeter;
+class CursesSetBar;
+class CursesBar;
 
 class MainCursesWindow : public CursesWindow
 {
@@ -28,6 +31,9 @@ public:
     bool handleInput(int ch);
 private:
     CursesVUMeter* iVUMeter;
+
+    CursesSetBar* iTargetLevel;
+    CursesBar* iTest;
 };
 
 

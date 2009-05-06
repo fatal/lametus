@@ -18,16 +18,18 @@ class CursesBar : public CursesControl
     Q_OBJECT
 
 public:
-	CursesBar(CursesControl * aParent, const QString& aLabel);
+	CursesBar(CursesControl * aParent, const QString& aLabel, int aPadding);
     ~CursesBar();
 
     void draw();
 
 public slots:
 	void setValue(int);
-private:
+protected:
 	int iValue;
+    virtual QString label();
     QString iLabel;
+    int iPadding;
 };
 
 

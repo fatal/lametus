@@ -30,7 +30,7 @@ CursesApplication::CursesApplication(int argc, char**argv) : QCoreApplication(ar
     refresh();
 
     iTimer = new QTimer();
-    iTimer->setInterval( 100 );
+    iTimer->setInterval( 60 );
     iTimer->setSingleShot( false );
 
     connect( iTimer, SIGNAL (timeout()),

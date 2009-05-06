@@ -6,8 +6,8 @@
 CursesVUMeter::CursesVUMeter(CursesControl* aParent ) :
 	CursesControl( aParent )
 {
-    iLeftChannel = new CursesBar( this, QString("[left ]") );
-    iRightChannel = new CursesBar( this, QString("[right]") );
+    iLeftChannel = new CursesBar( this, QString("[left ]"), 10 );
+    iRightChannel = new CursesBar( this, QString("[right]"), 10 );
 
     iLeftChannel->setRect(0, 1, 80, 2);
     iRightChannel->setRect(0, 2, 80, 2);
