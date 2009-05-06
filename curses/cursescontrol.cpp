@@ -1,4 +1,6 @@
+#include <QtCore/QTimer>
 #include "cursescontrol.h"
+
 
 CursesControl::CursesControl(CursesControl* aParent ) :
 	iParent( aParent ), iVisible ( 0 )

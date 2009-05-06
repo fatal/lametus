@@ -1,16 +1,16 @@
 /*
- * CursesBar.cpp
+ * CursesWindow.cpp
  *
  *  Created on: 5.5.2009
  *      Author: fatal
  */
-
 #include "curseswindow.h"
 #include "cursesapplication.h"
 
 CursesWindow::CursesWindow( CursesControl* aParent ) : 
 	CursesControl( aParent ), iChild(0)
 {
+    CursesApplication::addWindow(this);
 }
 
 CursesWindow::~CursesWindow()
@@ -27,7 +27,7 @@ WINDOW* CursesWindow::Window()
 {
     if ( iParent ) return iParent->Window();
     else if ( iWindow ) return iWindow;
-    iWindow = newwin( iWidth, iHeight, iX, iY );
+//    iWindow = newwin( iWidth, iHeight, iX, iY );
     return iWindow;
 }
 void CursesWindow::Show()

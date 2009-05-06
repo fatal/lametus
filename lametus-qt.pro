@@ -8,10 +8,10 @@ SOURCES += main.cpp \
     encoder.cpp \
     audiosource.cpp \
     settings.cpp \
-    curses/cursesapplication.cpp \
     curses/cursescontrol.cpp \
     curses/cursesbar.cpp \
     curses/cursesvbox.cpp \
+    curses/cursesapplication.cpp \
     curses/curseswindow.cpp
 HEADERS += mainwindow.h \
     encoder.h \

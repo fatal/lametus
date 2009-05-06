@@ -8,13 +8,14 @@
 #ifndef CURSESAPPLICATION_H_
 #define CURSESAPPLICATION_H_
 
+#include <curses.h>
 #include <QtCore/QObject>
 #include <QtCore/QCoreApplication>
 #include <QtCore/QEventLoop>
-#include <QtCore/QSocketNotifier>
+// #include <QtCore/QTimer>
 
 class CursesWindow;
-
+class QTimer;
 class CursesApplication : public QCoreApplication
 {
     Q_OBJECT
@@ -23,14 +24,16 @@ public:
     ~CursesApplication();
     static void addWindow(CursesWindow*);
     int exec();
-protected slots:
-    void keyboardInput(int);
+public slots:
+    void timerTimeout();
 
 private:
     void doAddWindow(CursesWindow*);
     QList<CursesWindow*> iWindows;
-    QSocketNotifier* iSocketNotifier;
 
+    QTimer* iTimer;
+
+    bool iPendingRedraw;
 };
 
 #endif /* CURSESAPPLICATION_H_ */

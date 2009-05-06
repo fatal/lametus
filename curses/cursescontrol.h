@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QtCore/QObject>
-#include <panel.h>
+#include <curses.h>
 
 class CursesControl : public QObject
 {
