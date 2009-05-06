@@ -3,6 +3,8 @@
 # -------------------------------------------------
 TARGET = lametus-qt
 TEMPLATE = app
+CONFIG += qt debug
+
 SOURCES += main.cpp \
     mainwindow.cpp \
     encoder.cpp \
@@ -12,7 +14,9 @@ SOURCES += main.cpp \
     curses/cursesbar.cpp \
     curses/cursesvbox.cpp \
     curses/cursesapplication.cpp \
-    curses/curseswindow.cpp
+    curses/curseswindow.cpp \
+    lametus.cpp \
+    lametus_ui.cpp
 HEADERS += mainwindow.h \
     encoder.h \
     audiosource.h \
@@ -21,7 +25,9 @@ HEADERS += mainwindow.h \
     curses/cursescontrol.h \
     curses/cursesbar.h \
     curses/cursesvbox.h \
-    curses/curseswindow.h
+    curses/curseswindow.h \
+    lametus.h \
+    lametus_ui.h 
 FORMS += mainwindow.ui
 INCLUDEPATH += /usr/include/shout/ \
     /usr/include/lame/ curses ../lame-3.89/include

@@ -37,12 +37,13 @@ void Encoder::connectToSource(AudioSource *src) {
     if (shout_open(shout) == SHOUTERR_SUCCESS) {
         qDebug("Connected to server...\n");
     } else {
-         qDebug("Error connecting: %s\n", shout_get_error(shout));
+      qDebug("Error connecting to %s: %s\n", server.toAscii().data(), shout_get_error(shout));
     }
 }
 
 void Encoder::Init(QString server, QString encodername, QString pass, QString genre, QString url, int pub, unsigned int samplerate, int bitrate, int channels) {
     this->encodername = encodername;
+    this->server = server;
     this->passwd = pass;
     this->genre = genre;
     this->url = url;
@@ -54,7 +55,7 @@ void Encoder::Init(QString server, QString encodername, QString pass, QString ge
     /* Output configuration */
     lame_set_out_samplerate(lame_flags,samplerate);
     lame_set_brate(lame_flags,bitrate);
-    if (channels != 0)
+    if (channels != 1)
         lame_set_mode(lame_flags, JOINT_STEREO); /* J-Stereo mode */
     else
         lame_set_mode(lame_flags, MONO); /* Mono mode */
@@ -62,12 +63,18 @@ void Encoder::Init(QString server, QString encodername, QString pass, QString ge
     lame_init_params(lame_flags);
     shout_init();
 
+    QString serverHost = "";
+    QString serverPort = "8000";
+    if(server.contains(":")) {
+      serverHost = server.split(":")[0];
+      serverPort = server.split(":")[1];
+    }
     if (!(shout = shout_new())) {
         qDebug("Could not allocate shout_t\n");
         return;
     }
 
-    if (shout_set_host(shout, server.toAscii().data()) != SHOUTERR_SUCCESS) {
+    if (shout_set_host(shout, serverHost.toAscii().data()) != SHOUTERR_SUCCESS) {
         qDebug("Error setting hostname: %s\n", shout_get_error(shout));
         return;
     }
@@ -77,11 +84,12 @@ void Encoder::Init(QString server, QString encodername, QString pass, QString ge
         return;
     }
 
-    if (shout_set_port(shout, 8000) != SHOUTERR_SUCCESS) {
+    if (shout_set_port(shout, serverPort.toInt()) != SHOUTERR_SUCCESS) {
         qDebug("Error setting port: %s\n", shout_get_error(shout));
         return;
     }
 
+    qDebug("Server: %s:%d", serverHost.toAscii().data(), serverPort.toInt());
     if (shout_set_password(shout, passwd.toAscii().data()) != SHOUTERR_SUCCESS) {
         qDebug("Error setting password: %s\n", shout_get_error(shout));
         return;
@@ -103,4 +111,8 @@ void Encoder::Init(QString server, QString encodername, QString pass, QString ge
 }
 
 void Encoder::Run(short *,int) {
+}
+
+QString Encoder::getServer() {
+  return server;
 }

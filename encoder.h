@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <QtCore/QStringList>
 #include <shout/shout.h>
 #include <lame.h>
 
@@ -14,12 +14,15 @@ class Encoder : public QObject
 public:
     Encoder(QObject * parent);
     ~Encoder();
-    void Init(QString server, QString name, QString pass, QString genre, QString url, int pub, unsigned int samplerate, int bitrate, int channels);
+    void Init(QString server, QString name, QString pass, 
+	      QString genre, QString url, int pub, 
+	      unsigned int samplerate, int bitrate, int channels);
     void Run(short *,int);
     void connectToSource(AudioSource * src);
+    QString getServer();
 private:
     lame_global_flags *lame_flags;
-
+    QString server;
     QString passwd;
     QString encodername;
     QString genre;

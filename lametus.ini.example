@@ -4,4 +4,4 @@ samplerate = 22050
 channels = 1
 
 [encoder]
-a=b
+server=icecast2.server.address:6464

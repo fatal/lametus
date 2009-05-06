@@ -17,6 +17,13 @@ struct audio_oss_internal
 {
         int fd;
 };
+
+enum audio_source_status_t {
+  AUDIO_SOURCE_OK,
+  AUDIO_SOURCE_FAIL,
+  AUDIO_SOURCE_UNKNOWN
+};
+
 class AudioSource : public QObject
 {
     Q_OBJECT
@@ -26,6 +33,7 @@ public:
     ~AudioSource();
     unsigned int getSamplerate();
     int getChannels();
+    audio_source_status_t getStatus();
     bool Init(unsigned int samplerate, int channels, QString device);
     void Read(unsigned char *,int);
 private:
@@ -33,7 +41,7 @@ private:
     unsigned int samplerate;
     int channels;
     void *internal_data;
-
+    audio_source_status_t status;
 };
 
 #endif // AUDIOSOURCE_H
