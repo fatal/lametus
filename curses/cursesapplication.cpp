@@ -9,11 +9,12 @@
 
 #include "cursesapplication.h"
 #include "curseswindow.h"
+#include "cursescontrol.h"
 
 
 CursesApplication * cursesApp = NULL;
 
-CursesApplication::CursesApplication(int argc, char**argv) : QCoreApplication(argc, argv)
+CursesApplication::CursesApplication(int argc, char**argv) : QCoreApplication(argc, argv), iCurrentFocus(0)
 {
     initscr(); start_color(); cbreak(); noecho();
     nonl();
@@ -49,10 +50,16 @@ CursesApplication::~CursesApplication()
     cursesApp = NULL;
 }
 
-void CursesApplication::addWindow(CursesWindow * aWindow)
+void CursesApplication::addWindow( CursesWindow * aWindow )
 {
     if ( cursesApp ) 
-        cursesApp->iWindows.append(aWindow);
+        cursesApp->iWindows.append( aWindow );
+}
+
+void CursesApplication::addFocusControl( CursesControl * aControl )
+{
+    if ( cursesApp ) 
+        cursesApp->iFocusControls.append( aControl );
 }
 
 int CursesApplication::exec()
@@ -81,4 +88,58 @@ void CursesApplication::timerTimeout()
 void CursesApplication::markDirty()
 {
     cursesApp->iPendingRedraw = true;
+}
+
+void CursesApplication::nextFocus()
+{
+    if ( !cursesApp ) return;
+    int count = cursesApp->iFocusControls.count();
+    if ( count < 2 ) return;
+    CursesControl* previous = currentFocus();
+    incFocus();
+    CursesControl* control = currentFocus();
+    if ( previous && control ) {
+        previous->setFocused( false );
+        control->setFocused( true );
+    }
+    
+}
+
+void CursesApplication::previousFocus()
+{
+    if ( !cursesApp ) return;
+    int count = cursesApp->iFocusControls.count();
+    if ( count < 2 ) return;
+    CursesControl* previous = currentFocus();
+    decFocus();
+    CursesControl* control = currentFocus();
+    if ( previous && control ) {
+        previous->setFocused( false );
+        control->setFocused( true );
+    }
+}
+
+void CursesApplication::incFocus()
+{
+    if ( !cursesApp ) return;
+    int count = cursesApp->iFocusControls.count();
+    cursesApp->iCurrentFocus ++;
+    cursesApp->iCurrentFocus %= count;
+} 
+
+void CursesApplication::decFocus()
+{
+    if ( !cursesApp ) return;
+    int count = cursesApp->iFocusControls.count();
+    if ( count < 2 ) return;
+    cursesApp->iCurrentFocus --;
+    if ( cursesApp->iCurrentFocus < 0 )
+        cursesApp->iCurrentFocus = count - 1;
+} 
+
+CursesControl* CursesApplication::currentFocus()
+{
+    if ( !cursesApp || !cursesApp->iFocusControls.count() )
+        return NULL;
+    return cursesApp->iFocusControls[cursesApp->iCurrentFocus];
 }

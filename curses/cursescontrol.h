@@ -30,7 +30,6 @@ protected:
     WINDOW* iWindow;
     void markDirty();
     int iFocused;
-
     virtual void drawString(const QString&);
 
 private:

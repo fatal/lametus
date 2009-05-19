@@ -6,12 +6,14 @@
  */
 
 #include "cursessetbar.h"
+#include "cursesapplication.h"
 
 CursesSetBar::CursesSetBar( CursesControl* aParent, 
                             const QString& aLabel,
                             int aPadding  ) : 
     CursesBar( aParent, aLabel, aPadding ) 
 {
+    CursesApplication::addFocusControl( this );
 }
 
 CursesSetBar::~CursesSetBar()
@@ -32,6 +34,7 @@ QString CursesSetBar::label()
 bool CursesSetBar::handleInput(int ch)
 {
     bool consumed = false;
+    if ( !isFocused() ) return false;
     switch(ch) {
     case KEY_LEFT:
         if ( iValue > 0 ) iValue --;

@@ -33,6 +33,7 @@ private:
     CursesVUMeter* iVUMeter;
 
     CursesSetBar* iTargetLevel;
+    CursesSetBar* iExtraLevel;
     CursesBar* iTest;
 };
 

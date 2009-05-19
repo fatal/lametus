@@ -6,7 +6,6 @@
 CursesControl::CursesControl(CursesControl* aParent ) :
 	iParent( aParent ), iVisible ( 0 ), iFocused( 0 )
 {
-
     // iWindow = newwin( w, h, x, y );
 }
 
@@ -51,14 +50,14 @@ bool CursesControl::handleInput( int ch )
 {
     bool consumed = false;
 
-    if ( iFocused ) {
+    if ( isFocused() ) {
         switch (ch) {
         case KEY_UP:
-//            focusUp(this);
+            CursesApplication::previousFocus();
             consumed = true;
             break;
         case KEY_DOWN:
-//            focusDown(this);
+            CursesApplication::nextFocus();
             consumed = true;
             break;
         }
