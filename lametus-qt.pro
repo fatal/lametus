@@ -22,6 +22,7 @@ SOURCES += main.cpp \
     curses/cursessetbar.cpp \
     curses-ui/vumeter.cpp \
     curses-ui/maincurseswindow.cpp \
+    curses-ui/source.cpp \
     lametus.cpp 
 HEADERS += mainwindow.h \
     encoder.h \
@@ -36,6 +37,7 @@ HEADERS += mainwindow.h \
     curses/cursessetbar.h \
     curses-ui/maincurseswindow.h \
     curses-ui/vumeter.h \
+    curses-ui/source.h \
     lametus.h 
 FORMS += mainwindow.ui
 INCLUDEPATH += /usr/include/shout/ \

@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 #else
     CursesApplication a(argc, argv);
     MainCursesWindow win(NULL);
+    win.setRect(0, 0, 80, 25);
     win.show();
     return a.exec();
 #endif

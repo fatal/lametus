@@ -20,6 +20,7 @@
 class CursesVUMeter;
 class CursesSetBar;
 class CursesBar;
+class CursesAudioSource;
 
 
 class MainCursesWindow : public CursesWindow
@@ -42,6 +43,7 @@ private:
     CursesSetBar* iTargetLevel;
     CursesSetBar* iExtraLevel;
     CursesBar* iTest;
+    CursesAudioSource* iAudioSource;
 
 protected:
 public slots:
@@ -52,6 +54,7 @@ public slots:
     void encoderUpdated(Encoder *enc);
 private:
     Lametus lametus;
+    QList<QString> iErrorMessages;
 
 };
 

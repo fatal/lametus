@@ -4,9 +4,9 @@
 #include <QtCore/QObject>
 #include <QtCore/QRect>
 #include <curses.h>
+#include "cursescontext.h"
 
 class QString;
-class CursesContext;
 
 class CursesControl : public QObject
 {
