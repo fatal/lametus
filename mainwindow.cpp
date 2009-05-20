@@ -5,7 +5,15 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindowClass)
 {
   ui->setupUi(this);
-  lametus.initialize(this);
+  connect( &lametus, SIGNAL( audioSourceCreated( AudioSource* ) ),
+        this, SLOT( audioSourceCreated( AudioSource* ) ) );
+  connect( &lametus, SIGNAL( audioSourceUpdated( AudioSource* ) ),
+        this, SLOT( audioSourceUpdated( AudioSource* ) ) );
+  connect( &lametus, SIGNAL( encoderCreated( Encoder* ) ),
+        this, SLOT( encoderCreated( Encoder* ) ) );
+  connect( &lametus, SIGNAL( errorMessage( QString ) ),
+        this, SLOT( errorMessage( QString ) ) );
+  lametus.initialize();
 }
 
 MainWindow::~MainWindow()
@@ -14,7 +22,7 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::errorMessage(QString msg) {
-  LametusUI::errorMessage(msg);
+  // LametusUI::errorMessage(msg);
   QMessageBox msgbox;
   msgbox.setText(msg);
   msgbox.exec();

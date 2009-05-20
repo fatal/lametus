@@ -11,9 +11,16 @@
 #include <QtCore/QObject>
 #include "curseswindow.h"
 
+#include "audiosource.h"
+#include "settings.h"
+#include "encoder.h"
+#include "lametus.h"
+
+
 class CursesVUMeter;
 class CursesSetBar;
 class CursesBar;
+
 
 class MainCursesWindow : public CursesWindow
 {
@@ -35,6 +42,17 @@ private:
     CursesSetBar* iTargetLevel;
     CursesSetBar* iExtraLevel;
     CursesBar* iTest;
+
+protected:
+public slots:
+    void errorMessage(QString msg);
+    void audioSourceCreated(AudioSource *src);
+    void audioSourceUpdated(AudioSource *src);
+    void encoderCreated(Encoder *enc);
+    void encoderUpdated(Encoder *enc);
+private:
+    Lametus lametus;
+
 };
 
 

@@ -22,6 +22,17 @@ MainCursesWindow::MainCursesWindow( CursesControl* aParent ) :
     iTargetLevel->setRect(0, 4, 80, 1);
     iTest->setRect(0, 5, 80, 1);
     iExtraLevel->setRect(0, 7, 80, 1);
+
+    connect( &lametus, SIGNAL( audioSourceCreated( AudioSource* ) ),
+        this, SLOT( audioSourceCreated( AudioSource* ) ) );
+    connect( &lametus, SIGNAL( audioSourceUpdated( AudioSource* ) ),
+        this, SLOT( audioSourceUpdated( AudioSource* ) ) );
+    connect( &lametus, SIGNAL( encoderCreated( Encoder* ) ),
+        this, SLOT( encoderCreated( Encoder* ) ) );
+    connect( &lametus, SIGNAL( errorMessage( QString ) ),
+        this, SLOT( errorMessage( QString ) ) );
+
+    lametus.initialize();
 }
 
 MainCursesWindow::~MainCursesWindow()
@@ -59,4 +70,25 @@ bool MainCursesWindow::handleInput( int ch )
         return true;
     }
     return CursesWindow::handleInput( ch );
+}
+
+void MainCursesWindow::errorMessage(QString msg) {
+}
+
+void MainCursesWindow::audioSourceCreated(AudioSource *src) {
+  audioSourceUpdated(src);
+}
+
+void MainCursesWindow::audioSourceUpdated(AudioSource *src) {
+  audio_source_status_t status = src->getStatus();
+    
+    /*
+     if(status==AUDIO_SOURCE_OK);
+     else if(status==AUDIO_SOURCE_FAIL);
+     else if(status==AUDIO_SOURCE_UNKNOWN);
+    */
+}
+void MainCursesWindow::encoderCreated(Encoder *enc) {
+}
+void MainCursesWindow::encoderUpdated(Encoder *enc) {
 }

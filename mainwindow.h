@@ -8,26 +8,26 @@
 #include "settings.h"
 #include "encoder.h"
 #include "lametus.h"
-#include "lametus_ui.h"
 
 namespace Ui
 {
     class MainWindowClass;
 }
 
-class MainWindow : public QMainWindow, LametusUI
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    virtual void errorMessage(QString msg);
-    virtual void audioSourceCreated(AudioSource *src);
-    virtual void audioSourceUpdated(AudioSource *src);
-    virtual void encoderCreated(Encoder *enc);
-    virtual void encoderUpdated(Encoder *enc);
+
 public slots:
+    void errorMessage(QString msg);
+    void audioSourceCreated(AudioSource *src);
+    void audioSourceUpdated(AudioSource *src);
+    void encoderCreated(Encoder *enc);
+    void encoderUpdated(Encoder *enc);
 
 private:
     Ui::MainWindowClass *ui;

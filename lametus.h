@@ -5,7 +5,6 @@
 #include <audiosource.h>
 #include <settings.h>
 #include <encoder.h>
-#include <lametus_ui.h>
 
 class Lametus : public QObject
 {
@@ -16,17 +15,22 @@ public:
     ~Lametus();
     // Loads settings, creates source and encoders
     // returns FALSE if fails
-    bool initialize(LametusUI *lameUi);
+    bool initialize();
 
 public slots:
     void sourceFound(unsigned int samplerate, int channels, QString device);
     void encoderFound(QString server, QString name, QString pass, 
 		      QString genre, QString url, int pub, 
 		      unsigned int samplerate, int bitrate, int channels);
+
+signals:
+    void audioSourceCreated(AudioSource*);
+    void audioSourceUpdated(AudioSource*);
+    void encoderCreated(Encoder*);
+    void errorMessage(QString);
 private:
     AudioSource *audioSource;
     QList<Encoder*> encoders;
-    LametusUI *ui;
 };
 
 #endif // LAMETUS_H
