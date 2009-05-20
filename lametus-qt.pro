@@ -5,6 +5,9 @@ TARGET = lametus-qt
 TEMPLATE = app
 CONFIG += qt debug
 
+MOC_DIR=tmp
+OBJECTS_DIR=tmp
+
 SOURCES += main.cpp \
     mainwindow.cpp \
     encoder.cpp \
