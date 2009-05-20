@@ -20,10 +20,9 @@ SOURCES += main.cpp \
     curses/cursesapplication.cpp \
     curses/curseswindow.cpp \
     curses/cursessetbar.cpp \
-    vumeter.cpp \
-    maincurseswindow.cpp \
-    lametus.cpp \
-    lametus_ui.cpp
+    curses-ui/vumeter.cpp \
+    curses-ui/maincurseswindow.cpp \
+    lametus.cpp 
 HEADERS += mainwindow.h \
     encoder.h \
     audiosource.h \
@@ -35,13 +34,12 @@ HEADERS += mainwindow.h \
     curses/cursesvbox.h \
     curses/curseswindow.h \
     curses/cursessetbar.h \
-    maincurseswindow.h \
-    vumeter.h \
-    lametus.h \
-    lametus_ui.h 
+    curses-ui/maincurseswindow.h \
+    curses-ui/vumeter.h \
+    lametus.h 
 FORMS += mainwindow.ui
 INCLUDEPATH += /usr/include/shout/ \
-    /usr/include/lame/ curses ../lame-3.89/include
+    /usr/include/lame/ curses ../lame-3.89/include curses-ui
 LIBS += -L. -lmp3lame \
     -lshout -lncurses
 OTHER_FILES += lametus.ini
