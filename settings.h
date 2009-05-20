@@ -12,7 +12,7 @@ public:
     Settings(QObject * parent);
     bool Read(QString filename);
 signals:
-    void sourceFound(unsigned int samplerate, int channels, QString device);
+    void sourceFound(QString type, unsigned int samplerate, int channels, QString device);
     void encoderFound(QString server, QString name, QString pass, QString genre, QString url, int pub, unsigned int samplerate, int bitrate, int channels);
 private:
     void configureSource(QSettings * settings);

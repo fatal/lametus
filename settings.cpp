@@ -14,7 +14,7 @@ bool Settings::Read(QString filename)
     for (int i = 0; i < groups.size(); ++i) {
         if(groups.at(i) == "source") {
             settings.beginGroup(groups.at(i));
-            emit sourceFound(settings.value("samplerate", 44100).toInt(), settings.value("channels", 2).toInt(), settings.value("device", "/dev/dsp").toString());
+            emit sourceFound(settings.value("type", "oss").toString(), settings.value("samplerate", 44100).toInt(), settings.value("channels", 2).toInt(), settings.value("device", "/dev/dsp").toString());
             settings.endGroup();
         } else if(groups.at(i) == "encoder") {
             settings.beginGroup(groups.at(i));

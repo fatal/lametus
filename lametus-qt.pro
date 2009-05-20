@@ -12,6 +12,8 @@ SOURCES += main.cpp \
     mainwindow.cpp \
     encoder.cpp \
     audiosource.cpp \
+    audiosource_oss.cpp \
+    audiosource_pulse.cpp \
     settings.cpp \
     curses/cursescontrol.cpp \
     curses/cursescontext.cpp \
@@ -27,6 +29,8 @@ SOURCES += main.cpp \
 HEADERS += mainwindow.h \
     encoder.h \
     audiosource.h \
+    audiosource_oss.h \
+    audiosource_pulse.h \
     settings.h \
     curses/cursesapplication.h \
     curses/cursescontrol.h \
@@ -43,5 +47,5 @@ FORMS += mainwindow.ui
 INCLUDEPATH += /usr/include/shout/ \
     /usr/include/lame/ curses ../lame-3.89/include curses-ui
 LIBS += -L. -lmp3lame \
-    -lshout -lncurses
+    -lshout -lncurses -lpulse-simple
 OTHER_FILES += lametus.ini

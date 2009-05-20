@@ -1,4 +1,6 @@
 #include "lametus.h"
+#include "audiosource_oss.h"
+#include "audiosource_pulse.h"
 
 Lametus::Lametus(QObject *parent) : QObject(parent)
 {
@@ -8,8 +10,8 @@ Lametus::Lametus(QObject *parent) : QObject(parent)
 bool Lametus::initialize()
 {
     Settings *settings = new Settings(this);
-    connect(settings, SIGNAL(sourceFound(uint,int,QString)),
-            this, SLOT(sourceFound(uint,int,QString)));
+    connect(settings, SIGNAL(sourceFound(QString,uint,int,QString)),
+            this, SLOT(sourceFound(QString,uint,int,QString)));
     connect(settings, SIGNAL(encoderFound(QString,QString,QString,QString,QString,int,uint,int,int)),
             this, SLOT(encoderFound(QString,QString,QString,QString,QString,int,uint,int,int)));
     if(!settings->Read("./lametus.ini")) {
@@ -31,12 +33,24 @@ Lametus::~Lametus()
 
 }
 
-void Lametus::sourceFound(unsigned int samplerate, int channels, QString device) {
-    audioSource = new AudioSource(this);
-    emit audioSourceCreated(audioSource);
-    if(!audioSource->Init(samplerate, channels, device)) {
-        emit errorMessage("Audio source init failed.");
+void Lametus::sourceFound(QString type, unsigned int samplerate, int channels, QString device) {
+    if ( type == "oss" ) {
+        AudioSourceOss* source = new AudioSourceOss(this);
+        emit audioSourceCreated(source);
+        if(!source->Init(samplerate, channels, device)) {
+            emit errorMessage("Audio source init failed.");
+        }
+        audioSource = source;
     }
+    else if ( type == "pulse" ) {
+        AudioSourcePulse* source = new AudioSourcePulse(this);
+        emit audioSourceCreated(source);
+        if(!source->Init(samplerate, channels)) {
+            emit errorMessage("Audio source init failed.");
+        }
+        audioSource = source;
+    }
+    
     emit audioSourceUpdated( audioSource );
 }
 
