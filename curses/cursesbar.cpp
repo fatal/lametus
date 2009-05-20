@@ -6,6 +6,7 @@
  */
 
 #include "cursesbar.h"
+#include "cursescontext.h"
 
 CursesBar::CursesBar( CursesControl* aParent, const QString& aLabel,
                       int aPadding  ) : 
@@ -38,24 +39,33 @@ QString CursesBar::label()
 void CursesBar::draw()
 {
 	int i;
-    move( iY, iX );
-    if ( iFocused ) attron(A_REVERSE);
-    drawString( label() );
-    attroff(A_REVERSE);
-    move( iY, iX+iPadding );
-    int w = iWidth - iPadding;
+
+    CursesContext& cc = context();
+    cc.setColor( 1 );
+
+    cc.moveTo( 0, 0 );
+
+    if ( iFocused ) cc.setReverse( true );
+    cc.drawString( label() );
+    cc.setReverse( false );
+
+    cc.moveTo( iPadding, 0 );
+
+    int w = iPosition.width() - iPadding;
 
     int value = w * iValue / 100;
 
 	for ( i=0 ; i<value; i++ )
 	{
 		if ( i > w * 7 / 10 )
-			addch('#'|COLOR_PAIR(1));
+			cc.setColor(1);
 		else if ( i > w * 6 / 10 )
-			addch('#'|COLOR_PAIR(2));
+			cc.setColor(2);
 		else
-			addch('#'|COLOR_PAIR(3));
+			cc.setColor(3);
+
+        cc.drawChar( QChar('#') );
 	}
-    for (; i<w; i++) addch(' ');
+    for (; i<w; i++) cc.drawChar( QChar(' ') );
 	CursesControl::draw();
 }

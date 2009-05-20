@@ -1,16 +1,17 @@
 #include <QtCore/QTimer>
 #include "cursescontrol.h"
 #include "cursesapplication.h"
+#include "cursescontext.h"
 
 
 CursesControl::CursesControl(CursesControl* aParent ) :
-	iParent( aParent ), iVisible ( 0 ), iFocused( 0 )
+	iParent( aParent ), iVisible ( 0 ), iFocused( 0 ), iCursesContext( 0 )
 {
-    // iWindow = newwin( w, h, x, y );
 }
 
 CursesControl::~CursesControl()
 {
+    if ( iCursesContext ) delete iCursesContext;
 }
 
 int CursesControl::controlCount()
@@ -41,10 +42,7 @@ WINDOW * CursesControl::Window()
 }
 void CursesControl::setRect( int x, int y, int w, int h )
 {
-    iX = x;
-    iY = y;
-    iWidth = w;
-    iHeight = h;
+    iPosition = QRect(x, y, w, h);
 }
 bool CursesControl::handleInput( int ch )
 {
@@ -65,12 +63,6 @@ bool CursesControl::handleInput( int ch )
     for ( int i=0; i<controlCount() && !consumed; i++ )
         consumed = control(i)->handleInput(ch);
     return consumed;
-}
-
-void CursesControl::drawString( const QString& aString )
-{
-    for ( int i=0; i<aString.length(); i++ )
-        addch(aString.at(i).toLatin1());
 }
 
 void CursesControl::markDirty()
@@ -96,3 +88,11 @@ bool CursesControl::setFocused(bool aFocused)
     }
     return iFocused;
 }
+
+CursesContext& CursesControl::context() 
+{
+    if ( !iCursesContext ) 
+        iCursesContext = new CursesContext( iPosition );
+    return *iCursesContext;
+}
+

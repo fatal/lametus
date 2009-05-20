@@ -1,5 +1,5 @@
 
-// #define CURSES
+#define CURSES
 
 #ifndef CURSES
 #include <QtGui/QApplication>

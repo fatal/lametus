@@ -51,5 +51,6 @@ bool CursesSetBar::handleInput(int ch)
         markDirty();
         emit valueChanged( iValue );
     }
+    else consumed = CursesBar::handleInput(ch);
     return consumed;
 }

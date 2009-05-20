@@ -1,10 +1,12 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef CURSESCONTROL_H
+#define CURSESCONTROL_H
 
 #include <QtCore/QObject>
+#include <QtCore/QRect>
 #include <curses.h>
 
 class QString;
+class CursesContext;
 
 class CursesControl : public QObject
 {
@@ -22,17 +24,18 @@ public:
     virtual CursesControl* control(int index);
     virtual bool isNonFocusing();
     virtual bool setFocused(bool aFocused);
+    virtual CursesContext& context();
     bool isFocused();
 protected:
-    int iX, iY, iWidth, iHeight;
+    QRect iPosition;
     CursesControl* iParent;
     bool iVisible;
     WINDOW* iWindow;
     void markDirty();
-    int iFocused;
-    virtual void drawString(const QString&);
+    bool iFocused;
+    CursesContext* iCursesContext;
 
 private:
 };
 
-#endif // MAINWINDOW_H
+#endif // CURSESCONTROL_H

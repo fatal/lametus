@@ -11,6 +11,7 @@ SOURCES += main.cpp \
     audiosource.cpp \
     settings.cpp \
     curses/cursescontrol.cpp \
+    curses/cursescontext.cpp \
     curses/cursesbar.cpp \
     curses/cursesvbox.cpp \
     curses/cursesapplication.cpp \
@@ -26,6 +27,7 @@ HEADERS += mainwindow.h \
     settings.h \
     curses/cursesapplication.h \
     curses/cursescontrol.h \
+    curses/cursescontext.h \
     curses/cursesbar.h \
     curses/cursesvbox.h \
     curses/curseswindow.h \

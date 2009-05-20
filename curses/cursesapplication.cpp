@@ -10,26 +10,14 @@
 #include "cursesapplication.h"
 #include "curseswindow.h"
 #include "cursescontrol.h"
+#include "cursescontext.h"
 
 
 CursesApplication * cursesApp = NULL;
 
 CursesApplication::CursesApplication(int argc, char**argv) : QCoreApplication(argc, argv), iCurrentFocus(0)
 {
-    initscr(); start_color(); cbreak(); noecho();
-    nonl();
-    intrflush(stdscr, FALSE);
-    keypad(stdscr, TRUE);
-    nodelay(stdscr, TRUE);
-
-    clear();
-
-    init_pair(1, COLOR_BLUE, COLOR_BLACK);
-    init_pair(2, COLOR_RED, COLOR_BLACK);
-    init_pair(3, COLOR_WHITE, COLOR_BLACK);
-
-    refresh();
-
+    CursesContext::initialize();
     iTimer = new QTimer();
     iTimer->setInterval( 60 );
     iTimer->setSingleShot( false );
@@ -45,7 +33,7 @@ CursesApplication::CursesApplication(int argc, char**argv) : QCoreApplication(ar
 
 CursesApplication::~CursesApplication()
 {
-    endwin();
+    CursesContext::deInitialize();
     delete iTimer; 
     cursesApp = NULL;
 }
@@ -64,6 +52,7 @@ void CursesApplication::addFocusControl( CursesControl * aControl )
 
 int CursesApplication::exec()
 {
+    if ( iFocusControls.count() ) iFocusControls[0]->setFocused( true );
     return QCoreApplication::exec();
 }
 
