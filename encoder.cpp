@@ -115,12 +115,9 @@ void Encoder::Init(QString server, QString encodername, QString pass, QString ge
 void Encoder::dataAvailable( short* buffer, int len )
 {
     unsigned char outbuf[10240];
-    std::cerr << "Feeding: " << len << " shorts\n";
     int r = lame_encode_buffer_interleaved(lame_flags, buffer, len/2, outbuf, 10240);
-    std::cerr << r << " available\n";
     if ( r > 0 ) {
         int r2 = shout_send( shout, outbuf, r );
-        std::cerr << "Apparently sent: " << r2 << "\n";
     }
 }
 
