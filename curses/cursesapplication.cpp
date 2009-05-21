@@ -60,9 +60,12 @@ void CursesApplication::timerTimeout()
 {
     bool consumed = false;
     int ch = getch();
-    for ( int i=0; ch >= 0 && i<iWindows.count() && !consumed; i++ )
-    {
-        consumed = iWindows[0]->handleInput( ch );
+    while ( ch >= 0 ) {
+        for ( int i=0; i<iWindows.count() && !consumed; i++ )
+        {
+            consumed = iWindows[0]->handleInput( ch );
+        }  
+        ch = getch();
     }
 
     if ( iPendingRedraw ) {
