@@ -16,8 +16,8 @@ public:
     AudioSourcePulse(QObject * parent);
     ~AudioSourcePulse();
     bool Init(unsigned int samplerate, int channels);
-    int Read(unsigned char *,int);
 protected:
+    void read();
     QString devname;
     pa_simple* pulse;
 };

@@ -24,8 +24,8 @@ bool Settings::Read(QString filename)
                               settings.value("genre", "other").toString(),
                               settings.value("url", "http://lametus/").toString(),
                               settings.value("public", 0).toInt(),
-                              settings.value("samplerate", 0).toInt(),
-                              settings.value("bitrate", 44100).toInt(),
+                              settings.value("samplerate", 44100).toInt(),
+                              settings.value("bitrate", 128).toInt(),
                               settings.value("channels", 2).toInt());
             settings.endGroup();
         }

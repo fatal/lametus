@@ -1,4 +1,5 @@
 #include "audiosource_pulse.h"
+#include <iostream>
 
 AudioSourcePulse::AudioSourcePulse(QObject * parent) : AudioSource(parent)
 {
@@ -32,9 +33,11 @@ bool AudioSourcePulse::Init(unsigned int samplerate, int channels)
     status = AUDIO_SOURCE_OK;
     return TRUE;
 }
-
-int AudioSourcePulse::Read(unsigned char* buf, int maxLength )
+#define BUF_SIZE 8192
+void AudioSourcePulse::read()
 {
+    unsigned char buffer[BUF_SIZE];
     int err = 0;
-    return pa_simple_read( pulse, buf, maxLength, &err );
+    pa_simple_read( pulse, buffer, BUF_SIZE, &err );
+    emit dataAvailable((short*)buffer, BUF_SIZE/2);
 }

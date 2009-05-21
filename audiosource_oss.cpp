@@ -1,4 +1,5 @@
 #include "audiosource_oss.h"
+#include <unistd.h>
 
 AudioSourceOss::AudioSourceOss(QObject * parent) : AudioSource(parent)
 {
@@ -65,6 +66,18 @@ bool AudioSourceOss::Init(unsigned int samplerate, int channels, QString device)
     return TRUE;
 }
 
-int AudioSourceOss::Read(unsigned char* buf, int maxLength )
+#define BUF_SIZE 8192
+
+void AudioSourceOss::read()
 {
+    struct audio_oss_internal *oss =
+            (struct audio_oss_internal *)internal_data;
+    unsigned char buf[BUF_SIZE];
+    unsigned char* buffer = buf;
+    int got = 0;
+    while ( got < BUF_SIZE ) {
+        int r = ::read(oss->fd, buffer+got, BUF_SIZE-got);
+        got += r;
+    }
+    emit dataAvailable( (short*)buf, BUF_SIZE/2 );
 }

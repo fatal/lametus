@@ -11,15 +11,17 @@
 
 class Encoder : public QObject
 {
+    Q_OBJECT
 public:
     Encoder(QObject * parent);
     ~Encoder();
     void Init(QString server, QString name, QString pass, 
 	      QString genre, QString url, int pub, 
 	      unsigned int samplerate, int bitrate, int channels);
-    void Run(short *,int);
     void connectToSource(AudioSource * src);
     QString getServer();
+public slots:
+    void dataAvailable(short*, int);
 private:
     lame_global_flags *lame_flags;
     QString server;

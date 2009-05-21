@@ -3,6 +3,8 @@
 
 #include <QDebug>
 
+class QTimer;
+
 enum audio_source_status_t {
   AUDIO_SOURCE_OK,
   AUDIO_SOURCE_FAIL,
@@ -19,8 +21,14 @@ public:
     unsigned int getSamplerate();
     int getChannels();
     audio_source_status_t getStatus();
-    virtual int Read(unsigned char *,int) = 0;
+    void start();
+signals:
+    void dataAvailable(short*, int);
+public slots:
+    void timerTimeout();
 protected:
+    virtual void read() = 0;
+    QTimer* iTimer;
     unsigned int samplerate;
     int channels;
     audio_source_status_t status;

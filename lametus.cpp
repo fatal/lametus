@@ -25,12 +25,12 @@ bool Lametus::initialize()
     for(int e=0;e<encoders.size();e++) {
         encoders.at(e)->connectToSource(audioSource);
     }
+    audioSource->start();
     return TRUE;
 }
 
 Lametus::~Lametus()
 {
-
 }
 
 void Lametus::sourceFound(QString type, unsigned int samplerate, int channels, QString device) {

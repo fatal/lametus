@@ -27,8 +27,8 @@ public:
     AudioSourceOss(QObject * parent);
     ~AudioSourceOss();
     bool Init(unsigned int samplerate, int channels, QString device);
-    int Read(unsigned char *,int);
 protected:
+    void read();
     void *internal_data;
     QString devname;
 };
