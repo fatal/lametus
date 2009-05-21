@@ -14,6 +14,7 @@ SOURCES += main.cpp \
     audiosource.cpp \
     audiosource_oss.cpp \
     audiosource_pulse.cpp \
+    peakmonitor.cpp \
     settings.cpp \
     curses/cursescontrol.cpp \
     curses/cursescontext.cpp \
@@ -31,6 +32,7 @@ HEADERS += mainwindow.h \
     audiosource.h \
     audiosource_oss.h \
     audiosource_pulse.h \
+    peakmonitor.h \
     settings.h \
     curses/cursesapplication.h \
     curses/cursescontrol.h \
