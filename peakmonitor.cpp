@@ -24,5 +24,7 @@ void PeakMonitor::dataAvailable( short* buffer, int len )
         if( l > left ) left = l;
         if( r > right ) right = r;
     }
+    left /= 328;
+    right /= 328;
     emit peakValueChanged( left, right ); 
 }

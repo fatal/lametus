@@ -6,6 +6,8 @@
 #include <settings.h>
 #include <encoder.h>
 
+class PeakMonitor;
+
 class Lametus : public QObject
 {
     Q_OBJECT
@@ -28,9 +30,11 @@ signals:
     void audioSourceUpdated(AudioSource*);
     void encoderCreated(Encoder*);
     void errorMessage(QString);
+    void peakMonitorCreated(PeakMonitor*);
 private:
     AudioSource *audioSource;
     QList<Encoder*> encoders;
+    PeakMonitor *peakMonitor;
 };
 
 #endif // LAMETUS_H

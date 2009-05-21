@@ -21,7 +21,7 @@ class CursesVUMeter;
 class CursesSetBar;
 class CursesBar;
 class CursesAudioSource;
-
+class PeakMonitor;
 
 class MainCursesWindow : public CursesWindow
 {
@@ -52,6 +52,7 @@ public slots:
     void audioSourceUpdated(AudioSource *src);
     void encoderCreated(Encoder *enc);
     void encoderUpdated(Encoder *enc);
+    void peakMonitorCreated(PeakMonitor*);
 private:
     Lametus lametus;
     QList<QString> iErrorMessages;

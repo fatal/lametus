@@ -10,6 +10,7 @@
 #include "vumeter.h"
 #include "source.h"
 #include "cursescontext.h"
+#include "peakmonitor.h"
 
 MainCursesWindow::MainCursesWindow( CursesControl* aParent ) : 
 	CursesWindow( aParent )
@@ -37,6 +38,8 @@ MainCursesWindow::MainCursesWindow( CursesControl* aParent ) :
         this, SLOT( encoderCreated( Encoder* ) ) );
     connect( &lametus, SIGNAL( errorMessage( QString ) ),
         this, SLOT( errorMessage( QString ) ) );
+    connect( &lametus, SIGNAL( peakMonitorCreated( PeakMonitor* ) ),
+        this, SLOT( peakMonitorCreated( PeakMonitor* ) ) );
 
     lametus.initialize();
 }
@@ -77,7 +80,7 @@ void MainCursesWindow::draw()
 }
 bool MainCursesWindow::handleInput( int ch )
 {
-    if ( ch == 9 ) {
+    if ( ch == 9 || ch == 'q') {
         CursesApplication::quit();
         return true;
     }
@@ -107,4 +110,10 @@ void MainCursesWindow::audioSourceUpdated(AudioSource *src) {
 void MainCursesWindow::encoderCreated(Encoder *enc) {
 }
 void MainCursesWindow::encoderUpdated(Encoder *enc) {
+}
+
+void MainCursesWindow::peakMonitorCreated(PeakMonitor* monitor) 
+{
+    connect( monitor, SIGNAL( peakValueChanged(int,int) ), 
+        iVUMeter, SLOT( valueChanged(int, int) ) );
 }

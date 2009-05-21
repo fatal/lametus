@@ -41,3 +41,9 @@ bool CursesVUMeter::handleInput( int ch )
     if ( ch == '+' ) { iLeftChannel->setValue(50); return true; }
     return CursesControl::handleInput(ch);
 }
+
+void CursesVUMeter::valueChanged( int left, int right ) 
+{
+    iLeftChannel->setValue( left );
+    iRightChannel->setValue( right );
+}

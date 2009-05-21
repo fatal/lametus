@@ -1,6 +1,7 @@
 #include "lametus.h"
 #include "audiosource_oss.h"
 #include "audiosource_pulse.h"
+#include "peakmonitor.h"
 
 Lametus::Lametus(QObject *parent) : QObject(parent)
 {
@@ -25,6 +26,12 @@ bool Lametus::initialize()
     for(int e=0;e<encoders.size();e++) {
         encoders.at(e)->connectToSource(audioSource);
     }
+
+    peakMonitor = new PeakMonitor(this);
+    peakMonitor->connectToSource( audioSource );
+    
+    emit peakMonitorCreated(peakMonitor);
+
     audioSource->start();
     return TRUE;
 }
@@ -52,6 +59,8 @@ void Lametus::sourceFound(QString type, unsigned int samplerate, int channels, Q
     }
     
     emit audioSourceUpdated( audioSource );
+
+    
 }
 
 void Lametus::encoderFound(QString server, QString name, QString pass, QString genre, QString url, int pub, unsigned int samplerate, int bitrate, int channels) {

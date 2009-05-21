@@ -18,6 +18,9 @@ public:
     CursesControl* control(int);
     void draw();
     bool handleInput(int ch);
+public slots:
+    void valueChanged(int, int);
+
 protected:
     CursesBar* iLeftChannel;
     CursesBar* iRightChannel;
